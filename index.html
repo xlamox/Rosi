@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=yes" />
+  <title>مغامرة روزي الصغيرة ✨</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Fredoka+One&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none; /* تجعل اللمس أكثر أمانًا لكن ما تمنع الكتابة */
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(145deg, #ffe6f0 0%, #ffd9e8 100%);
+      font-family: 'Quicksand', 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* زينة خلفية مرحة */
+    .bg-stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-stars::before,
+    .bg-stars::after {
+      content: "✨⭐🌸🍭🎀";
+      font-size: 70px;
+      position: absolute;
+      opacity: 0.2;
+      white-space: pre;
+    }
+
+    .bg-stars::before {
+      top: 10%;
+      left: 5%;
+      transform: rotate(-15deg);
+    }
+
+    .bg-stars::after {
+      bottom: 10%;
+      right: 5%;
+      transform: rotate(10deg);
+    }
+
+    .confetti-shape {
+      position: fixed;
+      background: radial-gradient(circle, #ffb7c5, #ff8da1);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: floatConfetti 18s infinite linear;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes floatConfetti {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.4; }
+      80% { opacity: 0.4; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 18px 35px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* بطاقات كيوت */
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 48px;
+      box-shadow: 0 18px 35px rgba(255, 105, 180, 0.2), 0 5px 12px rgba(0, 0, 0, 0.05);
+      padding: 18px 22px;
+      border: 2px solid rgba(255, 220, 240, 0.8);
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 25px 40px rgba(255, 120, 160, 0.25);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffecf0;
+      padding: 8px 20px;
+      border-radius: 60px;
+      border: 1px solid #ffb7c5;
+      font-weight: 600;
+      color: #b3456b;
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #ff87a8;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px #ffa5c0;
+    }
+
+    .brand-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 20px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #e86f9e, #b34e73);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 38px;
+      margin: 15px 0 5px;
+      color: #9b4b6e;
+      text-shadow: 3px 3px 0 #ffd9e4;
+    }
+
+    .glow-word {
+      display: inline-block;
+      background: linear-gradient(145deg, #ff9ebb, #ff6d96);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 44px;
+      animation: bounceHappy 1.2s infinite alternate;
+    }
+
+    @keyframes bounceHappy {
+      0% { transform: translateY(0px); text-shadow: 0 0 0 #ffb7c5; }
+      100% { transform: translateY(-5px); text-shadow: 0 6px 12px #ff9eb5; }
+    }
+
+    .subtitle {
+      color: #c96d8f;
+      font-weight: 500;
+      font-size: 15px;
+      background: #fff0f5cc;
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 40px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .stat-card {
+      background: #fff5f9;
+      border-radius: 40px;
+      padding: 12px 20px;
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      border: 1px solid #ffccda;
+      box-shadow: 0 4px 10px #ffc0d0;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: bold;
+      color: #e684aa;
+    }
+
+    .stat-number {
+      font-family: 'Fredoka One', cursive;
+      font-size: 32px;
+      color: #d4618b;
+      line-height: 1;
+      margin: 6px 0 2px;
+    }
+
+    .task-card {
+      background: rgba(255, 248, 250, 0.95);
+      border-radius: 36px;
+      padding: 16px;
+      margin-bottom: 14px;
+      border: 1px solid #ffc0d4;
+      transition: all 0.2s;
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .task-title {
+      font-weight: 700;
+      font-size: 18px;
+      color: #9b4a6a;
+      background: #ffeef4;
+      padding: 5px 14px;
+      border-radius: 40px;
+      display: inline-block;
+    }
+
+    .type-badge {
+      background: #ffe1ea;
+      border-radius: 30px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #bd6183;
+    }
+
+    .progress-bar-bg {
+      background: #ffdfe8;
+      border-radius: 50px;
+      height: 14px;
+      width: 100%;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #ff98b6, #ff6a95);
+      width: 0%;
+      height: 100%;
+      border-radius: 50px;
+      transition: width 0.2s;
+    }
+
+    .done-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .btn-soft {
+      background: #ffdae5;
+      border: none;
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-weight: bold;
+      color: #a5476b;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      transition: 0.1s;
+      font-size: 14px;
+    }
+
+    .btn-soft:active {
+      transform: scale(0.96);
+      background: #ffc0d2;
+    }
+
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .add-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .input-cute {
+      background: white;
+      border: 2px solid #ffbfd2;
+      border-radius: 50px;
+      padding: 10px 18px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 14px;
+      outline: none;
+      flex: 1;
+      color: #7e4462;
+    }
+
+    .input-cute:focus {
+      border-color: #ff86ad;
+    }
+
+    .select-cute {
+      background: white;
+      border: 2px solid #ffbfd2;
+      border-radius: 50px;
+      padding: 10px 14px;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .btn-pink {
+      background: #ff98b6;
+      border: none;
+      border-radius: 60px;
+      padding: 10px 22px;
+      font-weight: bold;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.1s;
+      box-shadow: 0 5px 0 #b3456b;
+    }
+
+    .btn-pink:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #b3456b;
+    }
+
+    .btn-icon {
+      background: #ffe1ea;
+      border-radius: 50px;
+      border: none;
+      padding: 6px 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .message-zone {
+      background: #ffeff4;
+      border-radius: 50px;
+      padding: 12px 20px;
+      text-align: center;
+      font-weight: 600;
+      color: #bb6688;
+      margin: 15px 0;
+    }
+
+    .reward-badge {
+      background: #ffd966;
+      padding: 8px 15px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      color: #a3516f;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .title {
+        font-size: 28px;
+      }
+      .glow-word {
+        font-size: 32px;
+      }
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: #cb8aa8;
+      background: #fff0f5cc;
+      border-radius: 50px;
+      padding: 12px;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      transform: none !important;
+    }
+
+    .candy-icon {
+      font-size: 26px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .happy-flower {
+      font-size: 22px;
+      animation: spinSlow 8s infinite linear;
+      display: inline-block;
+    }
+
+    @keyframes spinSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+<div class="bg-stars"></div>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<script>
+  const h = React.createElement;
+  const { useState, useEffect, useMemo, useRef } = React;
+
+  // -------- كيوت ستوريج بسيط --------
+  const STORAGE_KEY = "ROSY_ADVENTURE_KIDS";
+  function saveGame(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+  function loadGame() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch(e) {}
+    return null;
+  }
+
+  // يوم اليوم بطريقة لطيفة
+  function getTodayKey() {
+    const d = new Date();
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
+  }
+
+  // مهام افتراضية أولية (بسيطة وملونة)
+  const defaultTasks = [
+    { id: "t1", title: "🌸 ترتيب الغرفة", target: 3, importance: 3, type: "مرتبة", done: 0 },
+    { id: "t2", title: "🍎 أكل فواكه", target: 2, importance: 4, type: "صحية", done: 0 },
+    { id: "t3", title: "📖 قراءة قصة", target: 1, importance: 5, type: "ذكية", done: 0 },
+    { id: "t4", title: "🎨 رسمة جميلة", target: 1, importance: 3, type: "إبداعية", done: 0 }
+  ];
+
+  // حساب التقدم البسيط للأطفال: نسبة مئوية من 0 إلى 100
+  function computeProgress(tasks) {
+    let totalWeight = 0;
+    let doneWeight = 0;
+    for (let t of tasks) {
+      const imp = t.importance || 1;
+      const target = Math.max(1, t.target);
+      const doneVal = Math.min(target, Math.max(0, t.done));
+      const ratio = doneVal / target;
+      totalWeight += imp;
+      doneWeight += imp * ratio;
+    }
+    if (totalWeight === 0) return 0;
+    return (doneWeight / totalWeight) * 100;
+  }
+
+  // رسائل تحفيزية للأطفال
+  const cheerMessages = [
+    "🎀 رائعة! أنتِ بطلة اليوم! 🎀", "🍭 يومك مليء بالإنجازات! 🌈", "✨ واو! استمري يا بطلة ✨",
+    "🌸 أنتِ نجمة مشرقة 🌸", "🍬 إنجاز رائع! 🍬", "💖 قلبي يفرح بتقدمك 💖",
+    "🦄 قوتك تكبر كل يوم 🦄", "⭐️ خطوة بخطوة تصنعين المجد ⭐️"
+  ];
+
+  function getCheerMessage(progress) {
+    if (progress >= 90) return "🏆 مذهلة! أنتِ بطلة خارقة! 🏆💖";
+    if (progress >= 70) return "🎉 ممتازة جداً! استمري في التألق 🎉✨";
+    if (progress >= 40) return "🌸 عمل جيد! تستطيعين أكثر غداً 🌸";
+    if (progress >= 10) return "🍭 بداية رائعة! لا تتوقفي 🍭";
+    return "🌟 كل يوم فرصة جديدة! ابدئي بمهمة صغيرة 🌟";
+  }
+
+  // حساب النقاط التقديرية (نجوم)
+  function calculateStars(progress) {
+    if (progress >= 80) return 3;
+    if (progress >= 50) return 2;
+    if (progress >= 20) return 1;
+    return 0;
+  }
+
+  // تحديث اليوم التلقائي بطريقة بسيطة (لا يوجد عقوبات، فقط ننظف المهام كل يوم جديد)
+  function resetDayIfNeeded(prevState, todayKey) {
+    if (prevState.lastDay === todayKey) return prevState;
+    // يوم جديد: نعيد تعيين done في كل المهام إلى 0
+    const newTasks = prevState.tasks.map(t => ({ ...t, done: 0 }));
+    // نحتفظ بالنجوم والأشياء الجميلة
+    return {
+      ...prevState,
+      tasks: newTasks,
+      lastDay: todayKey,
+      dailyProgress: 0,
+    };
+  }
+
+  // واجهة رئيسية للأطفال
+  function App() {
+    const loaded = useMemo(() => loadGame(), []);
+    const today = getTodayKey();
+
+    const [state, setState] = useState(() => {
+      const base = {
+        tasks: defaultTasks,
+        stars: 0,            // نجوم مجمعة
+        happiness: 100,      // مؤشر الفرحة (بدلاً من HP)
+        lastDay: today,
+        dailyProgress: 0,
+        perfectDays: 0,
+        totalStars: 0,
+      };
+      if (loaded && loaded.tasks) {
+        return { ...base, ...loaded, lastDay: loaded.lastDay || today };
+      }
+      return base;
+    });
+
+    // حفظ تلقائي
+    useEffect(() => {
+      saveGame(state);
+    }, [state]);
+
+    // كل يوم جديد: إعادة تعيين الإنجازات اليومية
+    useEffect(() => {
+      const nowDay = getTodayKey();
+      if (state.lastDay !== nowDay) {
+        setState(prev => resetDayIfNeeded(prev, nowDay));
+      }
+    }, [state.lastDay]);
+
+    // حساب نسبة التقدم اليومي (live)
+    const progressToday = useMemo(() => computeProgress(state.tasks), [state.tasks]);
+    const starRewardToday = calculateStars(progressToday);
+    const cheerMsg = getCheerMessage(progressToday);
+
+    // عندما تكتمل المهام نعطي نجوم ورسالة فرح (مرة واحدة في اليوم فقط يتم إضافة النجوم في نهاية اليوم تلقائيًا عند منتصف الليل)
+    // ولكن نضيف نظام تشجيع فوري: عند كل تغيير في done، لا نضيف نجوم فورية لكن العرض يظهر.
+    // اليوم إذا تم تحقيق نسبة عالية, عند منتصف الليل تُضاف النجوم تلقائياً. لكن للأطفال سنضيف زر "أنهيت يومي" بشكل اختياري سهل
+    // أو نجعل النظام يحسب تلقائيًا في نهاية اليوم.
+    // لتجنب التعقيد، سنضيف رسالة و نجمة يدوية إذا أرادت الطفلة، لكن الأسهل: عند تجاوز اليوم يتم منح النجوم بناءً على التقدم.
+    // نجعل آلية ودودة: في منتصف الليل توزع النجوم على أساس التقدم.
+    const finalizeDay = (prevState, todayKey) => {
+      if (prevState.lastDay === todayKey) return prevState;
+      const currentProgress = computeProgress(prevState.tasks);
+      const starsEarned = calculateStars(currentProgress);
+      const newTotalStars = (prevState.totalStars || 0) + starsEarned;
+      let perfectDays = prevState.perfectDays || 0;
+      if (currentProgress >= 90) perfectDays += 1;
+      // إعادة ضبط المهام
+      const resetTasks = prevState.tasks.map(t => ({ ...t, done: 0 }));
+      return {
+        ...prevState,
+        tasks: resetTasks,
+        lastDay: todayKey,
+        totalStars: newTotalStars,
+        perfectDays,
+        dailyProgress: currentProgress,
+        stars: starsEarned,
+      };
+    };
+
+    // مؤقت منتصف الليل
+    useEffect(() => {
+      const checkMidnight = () => {
+        const nowDay = getTodayKey();
+        setState(prev => {
+          if (prev.lastDay !== nowDay) {
+            return finalizeDay(prev, nowDay);
+          }
+          return prev;
+        });
+      };
+      const interval = setInterval(() => checkMidnight(), 1000 * 30);
+      const handleVisibility = () => { if (document.visibilityState === 'visible') checkMidnight(); };
+      document.addEventListener("visibilitychange", handleVisibility);
+      return () => { clearInterval(interval); document.removeEventListener("visibilitychange", handleVisibility); };
+    }, []);
+
+    // دوال تعديل المهام
+    function updateTask(id, patch) {
+      setState(prev => ({
+        ...prev,
+        tasks: prev.tasks.map(t => t.id === id ? { ...t, ...patch } : t)
+      }));
+    }
+
+    function addTask(title, target, importance, type) {
+      if (!title.trim()) return;
+      setState(prev => ({
+        ...prev,
+        tasks: [...prev.tasks, {
+          id: Date.now() + Math.random(),
+          title: title.slice(0, 20),
+          target: Math.max(1, target),
+          importance: importance,
+          type: type,
+          done: 0
+        }]
+      }));
+    }
+
+    function removeTask(id) {
+      setState(prev => ({ ...prev, tasks: prev.tasks.filter(t => t.id !== id) }));
+    }
+
+    const [newTitle, setNewTitle] = useState("");
+    const [newTarget, setNewTarget] = useState(3);
+    const [newType, setNewType] = useState("مرتبة");
+
+    // إضافة رسالة تشجيع عند وصول التقدم لـ 100%
+    useEffect(() => {
+      if (progressToday >= 99 && progressToday < 100.1 && state.tasks.some(t => t.done > 0)) {
+        // رسالة فرحة لكن من دون انزعاج
+      }
+    }, [progressToday]);
+
+    // عرض الحالة السعيدة
+    const starDisplay = "⭐".repeat(Math.min(5, Math.floor(state.totalStars || 0))) + "✨".repeat(Math.min(3, Math.floor((state.totalStars || 0)/2)));
+    const perfectMessage = state.perfectDays > 0 ? `🎀 أيام كاملة رائعة: ${state.perfectDays} 🎀` : "✨ قومي بكل المهام لتحصلي على أيام مميزة! ✨";
+
+    return h("div", { className: "wrap" },
+      // رأس كيوت
+      h("header", null,
+        h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" } },
+          h("div", { className: "badge" },
+            h("span", { className: "dot" }),
+            h("span", { className: "brand-name" }, "🌷 مغامرة روزي 🌷")
+          ),
+          h("div", { className: "reward-badge" }, h("span", { className: "candy-icon" }, "🍬"), " نجومي ", starDisplay)
+        ),
+        h("h1", { className: "title" },
+          "مرحباً يا بطلة ",
+          h("span", { className: "glow-word" }, "🌟 روزي 🌟")
+        ),
+        h("p", { className: "subtitle" }, "🎀 كل يوم مهام جديدة تنتظرك! اجمعي النجوم وحولي يومك لمغامرة سعيدة 🎀")
+      ),
+
+      // بطاقات إحصائيات لطيفة
+      h("div", { className: "stats-row" },
+        h("div", { className: "stat-card" },
+          h("div", { className: "stat-label" }, "🍬 تقدم اليوم 🍬"),
+          h("div", { className: "stat-number" }, `${Math.floor(progressToday)}%`),
+          h("div", { style: { fontSize: 12 } }, starRewardToday > 0 ? `ستحصلين على ${starRewardToday} نجم✨` : "✨")
+        ),
+        h("div", { className: "stat-card" },
+          h("div", { className: "stat-label" }, "⭐️ نجومي الكلية ⭐️"),
+          h("div", { className: "stat-number" }, state.totalStars || 0)
+        ),
+        h("div", { className: "stat-card" },
+          h("div", { className: "stat-label" }, "🎀 أيام ممتازة 🎀"),
+          h("div", { className: "stat-number" }, state.perfectDays || 0)
+        )
+      ),
+
+      h("div", { className: "message-zone" },
+        h("span", { style: { fontSize: "22px", marginLeft: "8px" } }, progressToday >= 80 ? "🏆🎉" : (progressToday >= 40 ? "🌸✨" : "🍭💪")),
+        " " + cheerMsg
+      ),
+
+      // قائمة المهام اليومية
+      h("div", { className: "card", style: { marginBottom: "20px" } },
+        h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap" } },
+          h("h3", { style: { color: "#c45a82", fontFamily: "Fredoka One", margin: 0 } }, "📋 مهام اليوم السعيدة 📋"),
+          h("span", { className: "type-badge" }, "⭐️ أكملي المهام لتحصلي على نجوم ⭐️")
+        ),
+        h("div", null, state.tasks.map(task => {
+          const targetNum = Math.max(1, task.target);
+          const doneNow = Math.min(targetNum, Math.max(0, task.done));
+          const percent = (doneNow / targetNum) * 100;
+          return h("div", { key: task.id, className: "task-card" },
+            h("div", { className: "task-header" },
+              h("div", { className: "task-title" }, `${task.title} ${task.type === "مرتبة" ? "🧸" : (task.type === "صحية" ? "🍎" : (task.type === "ذكية" ? "📚" : "🎨"))}`),
+              h("div", { className: "type-badge" }, task.type)
+            ),
+            h("div", { className: "progress-bar-bg" },
+              h("div", { className: "progress-fill", style: { width: `${percent}%` } })
+            ),
+            h("div", { className: "done-control" },
+              h("span", { style: { fontWeight: "bold", color: "#b3587c" } }, `✨ ${doneNow} / ${targetNum} ✨`),
+              h("button", {
+                className: "btn-soft btn-small",
+                onClick: () => updateTask(task.id, { done: Math.max(0, doneNow - 1) })
+              }, "➖"),
+              h("button", {
+                className: "btn-soft btn-small",
+                onClick: () => updateTask(task.id, { done: Math.min(targetNum, doneNow + 1) })
+              }, "➕"),
+              h("button", {
+                className: "btn-icon",
+                onClick: () => removeTask(task.id),
+                style: { marginRight: "auto", background: "#ffdae5" }
+              }, "🗑️")
+            )
+          );
+        })),
+        // إضافة مهمة جديدة بسيطة
+        h("div", { className: "add-section" },
+          h("input", {
+            className: "input-cute",
+            placeholder: "مهمة جديدة مثلاً: 🧸 ترتيب الألعاب",
+            value: newTitle,
+            onChange: e => setNewTitle(e.target.value)
+          }),
+          h("input", {
+            className: "input-cute", type: "number", min: "1", max: "10",
+            style: { width: "85px" },
+            value: newTarget,
+            onChange: e => setNewTarget(Math.max(1, parseInt(e.target.value) || 1))
+          }),
+          h("select", {
+            className: "select-cute",
+            value: newType,
+            onChange: e => setNewType(e.target.value)
+          }, ["مرتبة", "صحية", "ذكية", "إبداعية"].map(opt => h("option", { key: opt, value: opt }, opt))),
+          h("button", {
+            className: "btn-pink",
+            onClick: () => {
+              if (newTitle) {
+                addTask(newTitle, newTarget, 3, newType);
+                setNewTitle("");
+                setNewTarget(3);
+              }
+            }
+          }, "+ أضيفي مهمة 🌸")
+        )
+      ),
+
+      h("div", { className: "grid-2" },
+        h("div", { className: "card" },
+          h("div", { style: { display: "flex", gap: "12px", alignItems: "center" } },
+            h("span", { className: "candy-icon" }, "🍭"),
+            h("h3", { style: { color: "#b65178", margin: 0 } }, "نجومي ومكافآتي")
+          ),
+          h("p", { style: { fontSize: "28px", fontWeight: "bold", margin: "8px 0", color: "#f4a261" } }, starDisplay || "⭐️⭐️"),
+          h("p", { style: { fontSize: "13px", color: "#bc6f92" } }, perfectMessage),
+          h("div", { className: "message-zone", style: { background: "#ffeef5", marginTop: "12px" } },
+            "💖 كلما أكملتي المهام، تحصلين على نجوم في نهاية اليوم. استمري في التألق! 💖"
+          )
+        ),
+
+        h("div", { className: "card" },
+          h("div", { style: { display: "flex", gap: "10px", alignItems: "center" } },
+            h("span", { className: "happy-flower" }, "🌸"),
+            h("h3", { style: { margin: 0, color: "#b65178" } }, "نصيحة صغيرة")
+          ),
+          h("p", null, "🌟 يمكنك إضافة مهامك المفضلة (الرسم، مساعدة أمي، ترتيب غرفتك)."),
+          h("p", null, "🍎 كل يوم تحصلين على فرصة جديدة لجمع النجوم!"),
+          h("div", { style: { background: "#ffecf0", borderRadius: "50px", padding: "10px", marginTop: "10px", textAlign: "center" } },
+            "🎀 يومك جميل مثل قلبك 🎀"
+          )
+        )
+      ),
+
+      h("footer", { className: "footer" },
+        h("div", null, "💖 كل يوم جديد هو مغامرة جديدة! أكملي مهامك واحصلي على النجوم 💖"),
+        h("div", null, "✨✨ روزي تحبك ✨✨")
+      )
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+</script>
+</body>
+</html>
